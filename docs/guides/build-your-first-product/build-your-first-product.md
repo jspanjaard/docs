@@ -183,7 +183,7 @@ The following steps will run through some important aspects of the proto.
     Replace the `service Service{...}` section with the following:
 
     ```protobuf
-    ////  The receipt service
+	////  The receipt service
    //
    // The idea behind the service is that when a client takes out one
    // or more books, a receipt is created that keeps track of
@@ -201,14 +201,6 @@ The following steps will run through some important aspects of the proto.
         // Get an receipt
            // See: https://google.aip.dev/131
         rpc GetReceipt (GetReceiptRequest) returns (Receipt) {
-            option (google.api.http) = {
-                get: "/resources/receipts/v2/{name=receipts/*}"
-            };
-            option (google.api.method_signature) = "name";
-        }
-        // Update an receipt
-           // See: https://google.aip.dev/131
-        rpc UpdateReceipt (UpdateReceiptRequest) returns (Receipt) {
             option (google.api.http) = {
                 get: "/resources/receipts/v2/{name=receipts/*}"
             };
@@ -271,7 +263,7 @@ When you ran `alis neuron create ...` command, various template files were also 
 
 In your `go.mod`, uncomment the line similar to the one below:
 ```
-replace go.protobuf.ad.foo.alis.exchange with ../../../protobuf/foo/ad
+replace go.protobuf.foo.alis.exchange => ../../../../../../foo/protobuf/go
 ```
 2. Ensure that your terminal is open in the `v1` directory containing the `go.mod` file and run the command `go mod tidy` to sync the dependencies.
 
@@ -289,24 +281,25 @@ Ensure that the section above your `main.go` looks exactly like code below:
 package main
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
-	"google.golang.org/grpc"
 	"log"
 	"net"
 	"os"
 
-	pb "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1"
+	"cloud.google.com/go/firestore"
+	"google.golang.org/grpc"
+
+	pbBooks "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1"
+	pb "go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1"
 )
 
 // client is a global client, initialized once per cloud run instance.
 var (
-	bigtableClient    *bigtable.Client
+	firestoreClient    *firestore.Client
 	booksClient       pbBooks.BooksServiceClient
-	eventsClient      pbEvents.ServiceClient
 )
 
-func init() {
+ffunc init() {
 
 	// Pre-declare err to avoid shadowing.
 	var err error
@@ -328,30 +321,30 @@ func init() {
 		log.Fatalf("firestore.NewClient: %v", err)
 	}
 
-    // Retrieve BR cloud run hash from the environment.
+	// Retrieve BR cloud run hash from the environment.
 	brHash := os.Getenv("ALIS_OS_BR_CLOUDRUNHASH")
 	if brHash == "" {
 		log.Fatal("ALIS_OS_PROJECT env not set.")
 	}
 
-    // Create a connection with the gRPC server hosted on Cloud Run
-    // The URI of these services follows a consistent pattern:
-    // {NeuronName}-{GoogleProjectCloudRunHash}-{region}.a.run.app:443
-    // 
-    // The {GoogleProjectCloudRunHash} is not preemptable but is the same for all neurons
-    // of a specific product deployment, ie. the same for all Cloud Run services in a Google Project.
-    // This therefore requires you to obtain the hash from the product that you are making use of.
-    //
-    // The {region} is the region in which the service is hosted. The default region
-    // on alis.exchange is `ew`, ie. Europe-West. For more information on regions,
-    // see: __________.
-    if conn, err := NewConn(context.Background(), "resources-books-v1-" + brHash + "-ew.a.run.app:443", false); err != nil {
-        log.Fatalf("booksClient new connection: %v", err)
+	// Create a connection with the gRPC server hosted on Cloud Run
+	// The URI of these services follows a consistent pattern:
+	// {NeuronName}-{GoogleProjectCloudRunHash}-{region}.a.run.app:443
+	// 
+	// The {GoogleProjectCloudRunHash} is not preemptable but is the same for all neurons
+	// of a specific product deployment, ie. the same for all Cloud Run services in a Google Project.
+	// This therefore requires you to obtain the hash from the product that you are making use of.
+	//
+	// The {region} is the region in which the service is hosted. The default region
+	// on alis.exchange is `ew`, ie. Europe-West. For more information on regions,
+	// see: __________.
+	if conn, err := NewConn(context.Background(), "resources-books-v1-" + brHash + "-ew.a.run.app:443", false); err != nil {
+		log.Fatalf("booksClient new connection: %v", err)
 	} else {
-        // If the connection was succesfully established, instantiate a new
-        // client for the BooksService. This client will be used to make the
-        // appropriate calls to the BooksService methods.
-		booksClient = pb.NewBooksServiceClient(conn)
+		// If the connection was succesfully established, instantiate a new
+		// client for the BooksService. This client will be used to make the
+		// appropriate calls to the BooksService methods.
+		booksClient = pbBooks.NewBooksServiceClient(conn)
 	}
 }
 ```
@@ -374,7 +367,7 @@ The `local.env` should contain the following content:
 
 # Specifies the type of environment: 'development' or 'production'
 #
-# In the production environment this is automatically added to 
+# In the production environment this is automatically added to
 # The Cloud Run service through the specification in the `cloudrun.tf`
 ALIS_OS_ENV=development
 
@@ -392,7 +385,7 @@ ALIS_OS_PROJECT=foo-ad-dev-....
 #
 # For your own products, you can find this hash by opening
 # a Cloud Run instance and checking the URL.
-ALIS_OS_BR_CLOUDRUNHASH=radxpo5gpa
+ALIS_OS_BR_CLOUDRUNHASH=z5x5ywf7za
 ```
 <!-- TODO: NB make sure we can't generate service account keys in the Foo org using the CLI -->
 
@@ -424,17 +417,349 @@ func main() {
 }
 ```
 
-4. Copy over the tests in `methods_test.go`. Writing the tests first allow us to think about what our expected API behaviour should be before implementing
+At this stage, your IDE might show an error for the section `pb.RegisterReceiptsServiceServer(grpcServer, &myService{})`. Navigate to the `methods.go` file and ensure that the defintion for `myService` is exactly the same as the following:
 
-5. Implement the methods in `methods.go`. Copy over the code...
+```go
+// Create a Service object which we'll register with the Server
+type myService struct {
+	pb.UnimplementedReceiptsServiceServer
+}
+```
 
-> 🤓 The code itself provides the detailed logic about what happens but the typical body of a method will include
-> 1. Some validation of the arguments
-> 2. Some interaction with APIs
-> 3. Parsing if required
-> 4. Performing actions with APIs
-> 5. Response
 
-6. Run the tests
+4. **Write tests for the methods**
 
-If all of the tests have passed, we are ready build and deploy our neuron.
+It is good practice to write tests prior to implementing code. In the `methods_test.go` file, copy over the following code for us to test whether the implementation of the methods are behaving as expected.
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"log"
+	"testing"
+
+	pb "go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1"
+	"google.golang.org/genproto/googleapis/type/date"
+)
+
+// Simulate a client object
+var client myService
+
+// This init() function will only run when running Go tests.
+func init() {
+	// Include a link to the file location of where the log originated from
+	log.SetFlags(log.Lshortfile)
+
+	client = myService{}
+}
+
+func TestReceiptService_CreateReceipt(t *testing.T) {
+
+	// You can run
+
+	// Construct a request message
+	req := pb.CreateReceiptRequest{Receipt: &pb.Receipt{
+		Client: "test@foo.bar",
+		Books:  []string{"books/{book1}", "books/{book2}"},
+		RequiredReturnDate: &date.Date{
+			Year:  2023,
+			Month: 12,
+			Day:   01,
+		},
+	}}
+
+	// Run a method
+	res, err := client.CreateReceipt(context.Background(), &req)
+	if err != nil {
+		t.Error(err)
+	}
+
+	fmt.Println(res)
+}
+
+func TestReceiptService_GetReceipt(t *testing.T) {
+
+	// Construct a request message
+	req := pb.GetReceiptRequest{Name: "receipts/{insertReceiptID}"}
+
+	// Run a method
+	res, err := client.GetReceipt(context.Background(), &req)
+	if err != nil {
+		t.Error(err)
+	}
+
+	fmt.Println(res)
+}
+```
+
+
+5. **Implement the methods**
+
+We will now implement the two methods for the `ReceiptService`.
+
+> 🤓 The code itself provides the detailed logic about what happens but the typical body of a method will include:
+> 1. Some validation of the request arguments
+> 2. Some interaction with APIs to obtain data, such as reading from a database or hitting another product's API.
+> 3. Wrangling/use/update the obtained data based on the request arguments
+> 4. Calling additional APIS with the wrangled data, such as to store the updated data.
+> 5. Return a response
+
+The code in `methods.go` should be:
+
+```go
+package main
+
+import (
+	"context"
+	"regexp"
+	"time"
+
+	"github.com/google/uuid"
+	pbBooks "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1"
+	pb "go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1"
+	"google.golang.org/genproto/googleapis/type/date"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+)
+
+// Create a Service object which we'll register with the Server
+type myService struct {
+	pb.UnimplementedReceiptsServiceServer
+}
+
+func (s *myService) CreateReceipt(ctx context.Context, req *pb.CreateReceiptRequest) (*pb.Receipt, error) {
+	// validate that the requested books exist
+	for _, book := range req.GetReceipt().GetBooks() {
+		_, err := booksClient.GetBook(ctx, &pbBooks.GetBookRequest{Name: book})
+		if err != nil {
+			return nil, status.Errorf(codes.InvalidArgument, "books %v not found.", book)
+		}
+	}
+
+	// Validate that the return date was specified
+	if req.GetReceipt().GetRequiredReturnDate() == nil {
+		return nil, status.Errorf(codes.InvalidArgument, "return date must be specified.")
+	}
+
+	// Generate name for the receipt
+	req.GetReceipt().Name = "receipts/" + uuid.New().String()[:6]
+	// Generate the borrow date
+	req.GetReceipt().BorrowDate = &date.Date{
+		Year:  int32(time.Now().Year()),
+		Month: int32(time.Now().Month()),
+		Day:   int32(time.Now().Day()),
+	}
+
+	_, err := firestoreClient.Doc(req.GetReceipt().GetName()).Create(
+		ctx,
+		req.GetReceipt(),
+	)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "firestore related error: %v", err)
+	}
+
+	return req.GetReceipt(), nil
+}
+
+func (s *myService) GetReceipt(ctx context.Context, req *pb.GetReceiptRequest) (*pb.Receipt, error) {
+	//validate request
+	err := validateArgument("name", req.GetName(), `receipts\/([0-9]){21}`)
+	if err != nil {
+		return nil, err
+	}
+
+	// get data for user config
+	var res pb.Receipt
+	docSnap, err := firestoreClient.Doc(req.GetName()).Get(ctx)
+	if status.Code(err) == codes.NotFound {
+		return nil, status.Errorf(codes.NotFound, "resource (%s) not found", req.GetName())
+	} else if err != nil {
+		return nil, err
+	}
+
+	err = docSnap.DataTo(&res)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "GetReceipt: %v", err)
+	}
+	return &res, nil
+}
+
+// validateArgument validates an argument and returns an error if not valid.
+//
+// Good practice is to have separate files with utility functions such as this
+// but is added here for the sake of the example.
+func validateArgument(name string, value string, regex string) error {
+	// validate the Name field using regex
+	validateName := regexp.MustCompile(regex)
+	validatedName := validateName.MatchString(value)
+	if !validatedName {
+		return status.Errorf(
+			codes.InvalidArgument,
+			"%s (%s) is not of the right format: %s", name, value, regex)
+	}
+	return nil
+}
+
+```
+
+6. **Run the tests**
+
+> 🚩 Before running the test, ensure that your build configuration is using the `.env` file.
+
+... Should pass.
+
+Now that we know that things are working, we need to make some final tweaks before we can build and deploy.
+
+7. **Finishing touches**
+
+As we have noted, running `alis neuron genproto` WITHOUT the `-p` generates the definitions locally. We need to push these to the global definitions managed by **alis.exchange**.
+
+- **Remove local files**
+
+The locally compiled files need to be removed such as to not cause version control conflicts. In your terminal, navigate to the neuron's protobuf files by running
+
+```bash
+cd ~/alis.exchange/foo/protobuf/go/foo/ad/resources/receipts/v1/
+```
+
+Check that you are in the correct directory by running `ls`. The response should contain two files with `.pb.go` ending.
+
+Remove these files by runing `rm *`. Select yes if prompted whether to delete all the files.
+
+- **Generate the definitions and push to repo**
+
+To compile the the proto and push it to the repo managed by **alis.exchange** run the following command from your terminal, inserting your resource name:
+
+```bash
+alis neuron genproto foo.ad.resources-{yourResource}-v1 -p
+```
+
+- **Update Go mod to point to global definitions**
+
+In your `go.mod` file, remove all the content such that the file looks similar to the example below
+
+```go 
+module foo.lb.resources.receipts.v1
+
+go 1.17
+
+require (
+)
+
+```
+If successful, your `go.mod` should contain a `go.protobuf.foo.alis.exchange` entry under `require`. 
+
+:::details Troubleshooting errors
+
+Two common errors that users get at this stage are:
+
+1. **Module does not contain package**
+
+Typically follows the error message:
+
+``` ... module go.protobuf.foo.alis.exchange@latest found (...), but does not contain package go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1
+```
+
+This means that your previous step of pushing the definitions to the repo was not successful. Perform the action in 2. again and retry running `go mod tidy`
+
+2. **Unrecognized import path**
+
+Run the following command from the terminal and attempt `go mod tidy` again.
+
+go env -w GOPRIVATE=go.protobuf.foo.alis.exchange
+:::
+
+We are now ready to build and deploy
+
+- **Configure environmental variables**
+
+In the code, we have used various `os.Getenv()` statements. In the production environment, these need to be available within the container at run time. To do this we need to:
+
+- *Declare the variable in Terraform*
+In the neuron's directory within the `proto` repo, we need to add variables to the `variables.tf` file. This file contains variables that are automatically added and managed by **alis.exchange** as well as a set of custom, user defined variables. Add the following variables to the file:
+
+```hcl
+# Custom neuron specific ENVS:
+variable "ALIS_OS_BR_CLOUDRUNHASH" {}
+```
+
+- *Add the variable to the container*
+In the `cloudrun.tf` file check that the `containers` section contains the following specification:
+
+```hcl
+resource "google_cloud_run_service" "default" {
+	//Other content
+	containers {
+		image = "europe-west1-docker.pkg.dev/${var.ALIS_OS_PRODUCT_PROJECT}/neurons/${var.ALIS_OS_NEURON}:${var.ALIS_OS_NEURON_VERSION_COMMIT_SHA}"
+		env {
+			name = "ALIS_OS_PROJECT"
+			value = var.ALIS_OS_PROJECT
+		}
+		env {
+			name = "ALIS_OS_ENV"
+			value = "production"
+		}
+		env {
+			name = "ALIS_OS_PROJECT"
+			value = var.ALIS_OS_PROJECT
+		}
+		env {
+			name = "ALIS_OS_BR_CLOUDRUNHASH"
+			value = var.ALIS_OS_BR_CLOUDRUNHASH
+		}
+		resources {
+			limits = {
+			cpu: "1000m"
+			memory: "2Gi"
+			}
+		}
+	}
+	//Other content
+}
+```
+
+#### 🏃‍♂ Ex 8: Build the neuron
+
+1. Ensure that all files in both the `proto` and `products/ad` have been added to Git.
+2. Commit and push all files that you have worked on in the neuron.
+3. **Build the neuron**
+
+In your terminal, run the following command, specifying your neuron name:
+
+```bash
+alis neuron build foo.ad.resources-{yourResource}-v1
+```
+
+> 🤓 In the background, **alis.exchange** performs various actions:<br>
+> - A tag is added to the latest commit in the `proto` repo. This is used to know what the state of the proto and infrastructure was when the `build` took place.<br>
+> - The CLI looks for one or more *Dockerfile* in the `products/ad/resources/.../v1` directory.<br>
+> - If these files are present, these are executed within the *product project* (foo-lb-product-msc6ohw) [Cloud Build](https://console.cloud.google.com/cloud-build/builds?project=foo-ad-product-msc6ohw), which build the container images and places these on 
+[Artifact Registry](https://cloud.google.com/artifact-registry) within the *product project* (foo-lb-product-msc6ohw).<br>
+> - Updates the resources in the **alis.exchange** operating system such as to reflect the changes. 
+
+At this stage, the image has been created but it is not yet available for usage by anyone. To make it accessible, it needs to be deployed to a `product deployment`.
+
+#### 🏃‍♂ Ex 9: Deploy the neuron
+
+From the terminal, run the following command, specifying your neuron name:
+
+```bash
+alis neuron deploy foo.ad.resource-{yourResource}-v1 -e
+```
+
+The `-e` is added to specify environmental variables for the production environment. 
+
+- Follow the prompts and deploy the neuron to the existing product deployment.
+- When asked to add an environmental variable, add `ALIS_OS_BR_CLOUDRUNHASH` with the value of `z5x5ywf7za`. The other environmental variables are added automatically by **alis.exchange**.
+
+> 🤓 In the background, **alis.exchange** retrieves the neuron's Terraform specification from the commit history at the point in time when the `build` was run and applies the specification from the *product project* (foo-lb-product-msc6ohw), which has the relevant permissions to manage deployments.<br>
+> Scan throught the `*.tf` files to see what all is performed. It is valuable to know that in the `cloudrun.tf` a new Cloud Run service is created and the container built in the previous step is managed by the Cloud Run.
+
+
+
+<!-- ### 🙋🏾‍♀️ FAQ
+
+- How do I know when to run `build` and `deploy` for a `product` or `neuron`?
+ -->
