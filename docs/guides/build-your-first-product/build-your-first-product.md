@@ -58,7 +58,7 @@ The founders at `Foo` have decided to create a new Administrative product, `ad`,
 
 The product has already been created on **alis.exchange** and simply requires you to build it out. If you are interested in the process around how a product is created, open the section below.
 
-:::details 🤓 `ad` product creation on **alis.exchange**
+:::details 🤓 ad product creation on alis.exchange
 
 The process of creating a product is facilitated through the **alis.exchange** CLI. The following sections breaks down the actions that was followed by `foo` to create a product and a brief overview of what happened in the background.
 
@@ -570,7 +570,7 @@ func (s *myService) GetReceipt(ctx context.Context, req *pb.GetReceiptRequest) (
 		return nil, err
 	}
 
-	// get data for user config
+	// get data for the receipt
 	var res pb.Receipt
 	docSnap, err := firestoreClient.Doc(req.GetName()).Get(ctx)
 	if status.Code(err) == codes.NotFound {
@@ -754,11 +754,12 @@ The `-e` is added to specify environmental variables for the production environm
 - Follow the prompts and deploy the neuron to the existing product deployment.
 - When asked to add an environmental variable, add `ALIS_OS_BR_CLOUDRUNHASH` with the value of `z5x5ywf7za`. The other environmental variables are added automatically by **alis.exchange**.
 
-> 🤓 In the background, **alis.exchange** retrieves the neuron's Terraform specification from the commit history at the point in time when the `build` was run and applies the specification from the *product project* (foo-lb-product-msc6ohw), which has the relevant permissions to manage deployments.<br>
+> 🤓 In the background, **alis.exchange** retrieves the neuron's Terraform specification from the commit history at the point in time when the `build` was run and applies the specification from the *product project* (foo-lb-product-msc6ohw), which has the relevant permissions to manage deployments. This can also be viewed in the [Cloud Build logs](https://console.cloud.google.com/cloud-build/builds?project=foo-ad-product-msc6ohw).<br>
 > Scan throught the `*.tf` files to see what all is performed. It is valuable to know that in the `cloudrun.tf` a new Cloud Run service is created and the container built in the previous step is managed by the Cloud Run.
 
+Once the deployment has taken place, your neuron is in production 🚀
 
-
+<!-- TODO: Add a way for users to hit the product -->
 <!-- ### 🙋🏾‍♀️ FAQ
 
 - How do I know when to run `build` and `deploy` for a `product` or `neuron`?
