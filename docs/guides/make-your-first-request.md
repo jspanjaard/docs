@@ -1,3 +1,7 @@
+---
+title: Make your first request
+---
+
 # Make a request to a product
 
 > This section is supplementary to the [quickstart](/getting-started/quick-start.md). We recommend that you first complete the quickstart before 
@@ -424,9 +428,3 @@ Running a new function in debug mode allows you to see what happens at every lin
 ![gif of debug](../.vuepress/public/assets/images/debug_gif.gif)
 :::
 
-
-## Next Steps
-
-**Ready to join alis.exchange?** <a href="https://alis.exchange/signup" target="blank">Get in touch</a>.
-
-Already signed up? [Get your local environment set up](/getting-started/command-line-interface.md)
