@@ -47,13 +47,13 @@ Your Git needs to be configured with Google Cloud Source repositories. Credentia
 1. Run the following command to create a folder in your home directory **alis.exchange** with a sub-folder cli.
 
 ```bash
-    mkdir -p ~/alis.exchange/cli
+mkdir -p ~/alis.exchange/cli
 ```
 
 2. Add this folder to your `$PATH`:
 
 ```bash
-  export PATH=$PATH:~/alis.exchange/cli
+echo 'export PATH=$PATH:~/alis.exchange/cli' >> ~/.zshrc
 ```
 
 3. Download the latest version of the CLI for your operating system (OS) and architecture (ARCH). 
@@ -62,25 +62,16 @@ Your Git needs to be configured with Google Cloud Source repositories. Credentia
     
    ### List of available CLI binaries
    
-   MacOS:
-    - [Darwin Amd64](https://files.cli.alis.services/darwin/amd64/latest/alis)
-    - [Darwin Arm64](https://files.cli.alis.services/darwin/arm64/latest/alis)
-    
-   Windows:
-    - [Windows Amd64](https://files.cli.alis.services/windows/amd64/latest/alis)
-    - [Windows Arm](https://files.cli.alis.services/windows/arm/latest/alis)
-    - [Windows Arm64](https://files.cli.alis.services/windows/arm64/latest/alis)
-
-    Linux:
-    - [Linux Amd64](https://files.cli.alis.services/linux/arm64/latest/alis)
-    - [Linux Arm](https://files.cli.alis.services/linux/arm64/latest/alis)
-    - [Linux Arm64](https://files.cli.alis.services/linux/arm64/latest/alis)
-   
-
+   | MacOS        | Windows     | Linux  |
+   | ------ | -------------| -----|
+   |  | [Windows Arm](https://files.cli.alis.services/windows/arm/latest/alis) | [Linux Arm](https://files.cli.alis.services/linux/arm64/latest/alis) |
+   | [Darwin Arm64](https://files.cli.alis.services/darwin/arm64/latest/alis) | [Windows Arm64](https://files.cli.alis.services/windows/arm64/latest/alis)    | [Linux Arm64](https://files.cli.alis.services/linux/arm64/latest/alis) |
+   | [Darwin Amd64](https://files.cli.alis.services/darwin/amd64/latest/alis) | [Windows Amd64](https://files.cli.alis.services/windows/amd64/latest/alis) | [Linux Amd64](https://files.cli.alis.services/linux/arm64/latest/alis) | 
+  
 4. Place the file in your alis.exchange/cli folder. Run the following command to give it execute permission:
 
 ```bash
-    chmod a+x $HOME/alis.exchange/cli/alis
+chmod a+x $HOME/alis.exchange/cli/alis
 ```
 
 5. Close and restart all currently open terminal windows, including IDEs, such that the configurations of the paths can take place.
