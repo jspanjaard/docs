@@ -65,7 +65,7 @@ echo 'export PATH=$PATH:~/alis.exchange/cli' >> ~/.zshrc
    | MacOS        | Windows     | Linux  |
    | ------ | -------------| -----|
    |  | [Windows Arm](https://files.cli.alis.services/windows/arm/latest/alis) | [Linux Arm](https://files.cli.alis.services/linux/arm64/latest/alis) |
-   | [Darwin Arm64](https://files.cli.alis.services/darwin/arm64/latest/alis) | [Windows Arm64](https://files.cli.alis.services/windows/arm64/latest/alis)    | [Linux Arm64](https://files.cli.alis.services/linux/arm64/latest/alis) |
+   | [Darwin Arm64 (M1)](https://files.cli.alis.services/darwin/arm64/latest/alis) | [Windows Arm64](https://files.cli.alis.services/windows/arm64/latest/alis)    | [Linux Arm64](https://files.cli.alis.services/linux/arm64/latest/alis) |
    | [Darwin Amd64](https://files.cli.alis.services/darwin/amd64/latest/alis) | [Windows Amd64](https://files.cli.alis.services/windows/amd64/latest/alis) | [Linux Amd64](https://files.cli.alis.services/linux/arm64/latest/alis) | 
   
 4. Place the file in your alis.exchange/cli folder. Run the following command to give it execute permission:
