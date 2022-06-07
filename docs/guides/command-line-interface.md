@@ -76,7 +76,7 @@ chmod a+x $HOME/alis.exchange/cli/alis
 
 5. Close and restart all currently open terminal windows, including IDEs, such that the configurations of the paths can take place.
 
-   > For MacOs, open the CLI by right clicking on the file and open. This will prompt you 'The application is from an unidentified developer. Are you sure you want to open it?'. Select open. This will allow MacOs permission to always run the CLI and therefore you only have to do it with your initial installation.
+   > 🚩 For MacOs, open the CLI by right clicking on the file and open. This will prompt you 'The application is from an unidentified developer. Are you sure you want to open it?'. Select open. This will allow MacOs permission to always run the CLI and therefore you only have to do it with your initial installation.
 
 You have successfully installed the **alis.exchange** CLI!
 
