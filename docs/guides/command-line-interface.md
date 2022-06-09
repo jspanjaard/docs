@@ -64,9 +64,9 @@ echo 'export PATH=$PATH:~/alis.exchange/cli' >> ~/.zshrc
    
    | MacOS        | Windows     | Linux  |
    | ------ | -------------| -----|
-   |  | [Windows Arm](https://files.cli.alis.services/windows/arm/latest/alis) | [Linux Arm](https://files.cli.alis.services/linux/arm64/latest/alis) |
-   | [Darwin Arm64 (M1)](https://files.cli.alis.services/darwin/arm64/latest/alis) | [Windows Arm64](https://files.cli.alis.services/windows/arm64/latest/alis)    | [Linux Arm64](https://files.cli.alis.services/linux/arm64/latest/alis) |
-   | [Darwin Amd64](https://files.cli.alis.services/darwin/amd64/latest/alis) | [Windows Amd64](https://files.cli.alis.services/windows/amd64/latest/alis) | [Linux Amd64](https://files.cli.alis.services/linux/arm64/latest/alis) | 
+   |  | [Windows Arm](https://files.cli.alis.services/windows/arm/latest/alis.exe) | [Linux Arm](https://files.cli.alis.services/linux/arm64/latest/alis) |
+   | [Darwin Arm64 (M1)](https://files.cli.alis.services/darwin/arm64/latest/alis) | [Windows Arm64](https://files.cli.alis.services/windows/arm64/latest/alis.exe)    | [Linux Arm64](https://files.cli.alis.services/linux/arm64/latest/alis) |
+   | [Darwin Amd64](https://files.cli.alis.services/darwin/amd64/latest/alis) | [Windows Amd64](https://files.cli.alis.services/windows/amd64/latest/alis.exe) | [Linux Amd64](https://files.cli.alis.services/linux/arm64/latest/alis) | 
   
 4. Place the file in your alis.exchange/cli folder. Run the following command to give it execute permission:
 
@@ -76,7 +76,7 @@ chmod a+x $HOME/alis.exchange/cli/alis
 
 5. Close and restart all currently open terminal windows, including IDEs, such that the configurations of the paths can take place.
 
-   > For MacOs, open the CLI by right clicking on the file and open. This will prompt you 'The application is from an unidentified developer. Are you sure you want to open it?'. Select open. This will allow MacOs permission to always run the CLI and therefore you only have to do it with your initial installation.
+   > 🚩 For MacOs, open the CLI by right clicking on the file and open. This will prompt you 'The application is from an unidentified developer. Are you sure you want to open it?'. Select open. This will allow MacOs permission to always run the CLI and therefore you only have to do it with your initial installation.
 
 You have successfully installed the **alis.exchange** CLI!
 

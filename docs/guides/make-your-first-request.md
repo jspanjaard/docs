@@ -1,10 +1,10 @@
 ---
-title: Make your first request
+title: Make a request to a product in your local environment
 ---
 
-# Make a request to a product
+# Make a request to a product in your local environment
 
-> This section is supplementary to the [quickstart](/getting-started/quick-start.md). We recommend that you first complete the quickstart before 
+> 🚩 This section is supplementary to the [quickstart](/getting-started/quick-start.md). We recommend that you first complete the quickstart before attempting this section.
 
 Given the underlying technologies used, **alis.exchange** provides the ability to generate client libraries for various
 supported coding languages. For users of the product, it allows you to programmatically access products natively in your
@@ -22,7 +22,7 @@ Following the same Book example as the quickstart, this guide will step you thro
 
 ## Book repository example
 
-Foo is an organisation that builds products on **alis.exchange**. Their flagship book repository product,`BR`, provides
+Play is an organisation that builds products on **alis.exchange**. Their flagship book repository product,`ME`, provides
 details on digital books which they have available. The product defines a `book` resource as follows and has a
 `BookService` with two primary client facing methods that allows clients to list all available books and to get details
 on a specific book.
@@ -32,7 +32,7 @@ The full `Books.proto` file is shown for reference purposes.
 ```protobuf
 syntax = "proto3";
 
-package foo.br.resources.books.v1;
+package play.me.resources.books.v1;
 
 import "google/protobuf/empty.proto";
 import "google/api/resource.proto";
@@ -43,22 +43,39 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/field_mask.proto";
 import "google/type/date.proto";
 
-option go_package = "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1";
-// Book service for foo.br.
+option go_package = "go.protobuf.play.alis.exchange/play/me/resources/books/v1";
+// Book service for play.me.
+// Book service for play.me.
 service BooksService {
-	// List all available books.
-	rpc ListBooks(ListBooksRequest) returns (ListBooksResponse) {
-		option (google.api.http) = {
-			get: "/resources/books/v1/books"
-		};
-	}
-	// Get a specific book.
-	rpc GetBook(GetBookRequest) returns (Book) {
-		option (google.api.http) = {
-			get: "/resources/store/v1/{name=books/*}"
-		};
-		option (google.api.method_signature) = "name";
-	}
+     // Create a book.
+     rpc CreateBook(CreateBookRequest) returns (Book) {
+     	option (google.api.http) = {
+     		post: "/resources/store/v1/books"
+     		body: "book"
+     	};
+     	option (google.api.method_signature) = "book";
+     }
+    // Get a book.
+    rpc GetBook(GetBookRequest) returns (Book) {
+        option (google.api.http) = {
+            get: "/resources/store/v1/{name=books/*}"
+        };
+        option (google.api.method_signature) = "name";
+    }
+     // Delete a book.
+     rpc DeleteBook(DeleteBookRequest) returns (google.protobuf.Empty) {
+     	option (google.api.http) = {
+     		delete: "/resources/store/v1/{name=books/*}"
+     	};
+     	option (google.api.method_signature) = "name";
+     }
+    // List books.
+    // Features are listed in Descending order.
+    rpc ListBooks(ListBooksRequest) returns (ListBooksResponse) {
+        option (google.api.http) = {
+            get: "/resources/store/v1/books"
+        };
+    }
 }
 
 // The definition of a book resource.
@@ -78,20 +95,20 @@ message Book {
 	string publisher = 4 [(google.api.field_behavior) = REQUIRED];
 }
 
-// Request message for [foo.br.resources.books.v1.BooksService.CreateBook].
+// Request message for [play.me.resources.books.v1.BooksService.CreateBook].
 message CreateBookRequest {
 	// The book to create
 	Book book = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
-// Request message for [foo.br.resources.books.v1.BooksService.GetBook].
+// Request message for [play.me.resources.books.v1.BooksService.GetBook].
 message GetBookRequest {
 	// The book name is the unique identifier across organisations.
 	// Format: books/{book}
 	string name = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
-// Request message for [foo.br.resources.books.v1.BooksService.ListBooks].
+// Request message for [play.me.resources.books.v1.BooksService.ListBooks].
 message ListBooksRequest {
 	// The maximum number of books to return. The service may return fewer than
 	// this value.
@@ -100,7 +117,7 @@ message ListBooksRequest {
 	int32 page_size = 1 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Request message for [foo.br.resources.books.v1.BooksService.DeleteBook].
+// Request message for [play.me.resources.books.v1.BooksService.DeleteBook].
 message DeleteBookRequest {
 	// The resource name of the Book.
 	// Format: books/{book}.
@@ -143,7 +160,7 @@ import (
 	"google.golang.org/grpc/credentials/oauth"
 	"google.golang.org/grpc/status"
 
-	pb "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1"
+	pb "go.protobuf.play.alis.exchange/play/me/resources/books/v1"
 )
 
 // The booksClient is defined as a global variable. It is declared once on init and used to call the various methods of the BooksService
@@ -309,7 +326,7 @@ import (
 	"google.golang.org/grpc/credentials/oauth"
 	"google.golang.org/grpc/status"
 
-	pb "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1"
+	pb "go.protobuf.play.alis.exchange/play/me/resources/books/v1"
 )
 
 // The booksClient is defined as a global variable. It is declared once on init and used to call the various methods of the BooksService
@@ -420,11 +437,4 @@ Try your hands creating your own function and incorporating a request to the `Bo
 * Loop through all the books and print out the author.
 * Get a book and wrangle the response to be printed out in a sentence structure.
 * Use the response of `ListBooks` to make multiple `GetBook` requests.
-
-::: tip ProTip
-
-Running a new function in debug mode allows you to see what happens at every line of code when a function is executed. To run a function in debug mode in VS Code place a break point next to the line number of the function line you would like to explore during run time. Select the run & debug option in the left hand navigation bar. Click `Run and Debug`. All variables and there state at the break point is revealed in the left panel. The function is paused at the breakpoint, to continue with the function's execution click the red stop square in the top popup menu. Hover over the top popup menu's options to see what else you can do when a function is paused at a breakpoint.
-
-![gif of debug](../.vuepress/public/assets/images/debug_gif.gif)
-:::
 
