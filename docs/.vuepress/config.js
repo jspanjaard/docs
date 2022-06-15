@@ -77,5 +77,13 @@ module.exports = {
               after: '</div>',
             },
           ],
-      ],
+        [ 'tabs' ],
+        ["vuepress-plugin-code-copy", {
+            align: "bottom",
+            color: "#FFFFFF",
+            backgroundTransition: false,
+            staticIcon: true
+        }
+        ]
+    ],
   }
