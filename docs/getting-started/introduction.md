@@ -6,26 +6,16 @@ title: Introduction
 
 >**_"Our job as builders is to create the world as it could be."_** - <a href="https://farmerandfarmer.org/mastery/builder.html" target="_blank">Sep Kamvar</a>
 
-Welcome to the community driven platform that makes it remarkably easy to build, maintain and consume API first software.
+**alis.exchange** enables individuals and organisations to transform ideas into scalable, enterprise-grade digital services.
 
-## Mission
-The mission of **alis.exchange** is to empower builders and innovators to solve real problems rather than wasting time reinventing the wheel of cloud infrastructure management and dev ops.
+High-quality digital services are required to be scalable, readily accessible, secure, easy-to-use and interoperable with other digital services. The costs and expertise associated with these requirements are exacting, particularly at scale, which presents high barriers to entries for individuals and organisations.  
 
-### We believe that API-first cultures win
-As systems and organisations grow in complexity, an ever increasing share of effort is expended on non-value adding coordination.
-API-first cultures enable teams and systems to decouple dependencies and thereby increase velocity
+The technologies and standards already exist to lower these barriers to entry but are disjointed and require a lot of effort to consolidate and effectively leverage before the value is realised. We have done the work of thinking through these complex problems, identifying the best-in-class CNCF technologies and standards, and brought these together as alis.exchange. 
 
-### We believe that lowering the barriers to building software increases innovation
-Many of the "barriers to entry" of software, such as cloud system architecture, identity management, documentation management etc, are non-differentiating. We believe that by removing these barriers we can increase the time and effort dedicated to real innovation and problem solving.
-
-### We believe in the power of community
-The **alis.exchange** platform is built and maintained by it's community and for it's community. We believe that together we can build something great!
-
-<!-- This section definitely needs a lot more work -->
-## Method
-The **alis.exchange** platform comprises of patterns that enable the defining, managing and deploying of resource orientated services and interfaces in a consistent and scalable way.
-
-Curious as to how? See the [Reference](/references/resource-oriented-design) documents to find out more.
+Our aim is to empower anyone to create value for their organisations by democratising cloud software engineering, simplifying building, consuming and selling interoperable digital services. 
 
 ## Get Started
-Excited to start exploring. Begin by following the [Quick Start](./quick-start)
+
+Excited to find out more? Begin by checking out the [Quick Start](./quick-start) and scanning through the other documentation.
+
+Have any further questions? Or want to schedule a demo? <a href="https://alis.exchange/signup" target="_blank">Get in touch</a>.
