@@ -15,7 +15,7 @@ const sidebar = [
         collapsable: false, 
         children: [
           '/guides/build/overview',
-          '/guides/build/build-your-first-product/build-your-first-product',
+          // '/guides/build/build-your-first-product/build-your-first-product',
         ]
       },
       {
@@ -79,6 +79,7 @@ module.exports = {
       sidebar: sidebar,
       nextLinks: false,
       prevLinks: false,
+      searchPlaceholder: 'Search...',
       nav: [
         { text: 'Request Demo', link: 'https://alis.exchange/signup', rel: false },
       ]
