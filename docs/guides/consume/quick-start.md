@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-next: /make-your-first-request
+next: /guides/consume/make-your-first-request
 sidebarDepth: 0
 ---
 # Quick Start

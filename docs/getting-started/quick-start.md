@@ -1,6 +1,6 @@
 ---
 title: Quick Start
-next: /guides/set-up-your-favourite-IDE
+next: /guides/configuration/set-up-your-favourite-IDE
 ---
 # Quick Start
 

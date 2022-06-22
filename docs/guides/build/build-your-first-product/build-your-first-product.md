@@ -1,7 +1,7 @@
 ---
 title: Build your first product
 sidebarDepth: 0
-next: ../../consume/quick-start
+next: /guides/consume/quick-start
 ---
 
 # Build your first product
