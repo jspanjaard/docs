@@ -4,16 +4,36 @@ const sidebar = [
         collapsable: false,
         children: [
             "/getting-started/introduction",
-            "/getting-started/quick-start",
         ]
     },
     {
     title: 'Guides',
     collapsable: false, 
     children: [
-        "/guides/set-up-your-favourite-IDE",
-        "/guides/command-line-interface",
-        '/guides/make-your-first-request',
+      {
+        title: "Build",
+        collapsable: false, 
+        children: [
+          '/guides/build/overview',
+          // '/guides/build/build-your-first-product/build-your-first-product',
+        ]
+      },
+      {
+        title: "Consume",
+        collapsable: false, 
+        children: [
+          "/guides/consume/quick-start",
+          '/guides/consume/make-your-first-request',
+        ]
+      },
+      {
+        title: "Device Configuration",
+        collapsable: false, 
+        children: [
+          "/guides/configuration/command-line-interface",
+          "/guides/configuration/set-up-your-favourite-IDE",
+        ]
+      },
     ]
     },
     {
@@ -59,6 +79,10 @@ module.exports = {
       sidebar: sidebar,
       nextLinks: false,
       prevLinks: false,
+      searchPlaceholder: 'Search...',
+      nav: [
+        { text: 'Request Demo', link: 'https://alis.exchange/signup', rel: false },
+      ]
     },
     plugins: [
         [

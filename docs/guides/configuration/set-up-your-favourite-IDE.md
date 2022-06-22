@@ -1,6 +1,5 @@
 ---
 title: Set up your favourite IDE
-next: /guides/make-your-first-request
 ---
 
 # Set up your favourite IDE
@@ -21,11 +20,11 @@ A few things to consider when choosing your IDE. VS Code and GoLand provides sup
 <div class="VSCodePluginContainer"> 
 
 ::: VSCodePluginImage
-![](../.vuepress/public/assets/images/VSgoPlugin.png)
+![](../../.vuepress/public/assets/images/VSgoPlugin.png)
 :::
 
 ::: VSCodePluginImage
-![](../.vuepress/public/assets/images/VSCodeAIPLinter.png)
+![](../../.vuepress/public/assets/images/VSCodeAIPLinter.png)
 :::
 
 </div>
@@ -44,29 +43,28 @@ The aip linter plugin requires that there is either a `.api-linter.json` or `.ap
     <div class="GoLandPluginContainer"> 
 
     ::: GoLandPluginImage
-    ![](../.vuepress/public/assets/images/envFile.png)
+    ![](../../.vuepress/public/assets/images/envFile.png)
     :::
 
     ::: GoLandPluginImage
-    ![](../.vuepress/public/assets/images/envFileSupport.png)
+    ![](../../.vuepress/public/assets/images/envFileSupport.png)
     :::
 
     ::: GoLandPluginImage
-    ![](../.vuepress/public/assets/images/gitToolBox.png)
+    ![](../../.vuepress/public/assets/images/gitToolBox.png)
     :::
 
     ::: GoLandPluginImage
-    ![](../.vuepress/public/assets/images/Terraform.png)
+    ![](../../.vuepress/public/assets/images/Terraform.png)
     :::
 
     ::: GoLandPluginImage
-    ![](../.vuepress/public/assets/images/aipLinter.png)
+    ![](../../.vuepress/public/assets/images/aipLinter.png)
     :::
 
     </div>
     
 
-    
 
 ### Plugin Configuration
 
@@ -77,7 +75,7 @@ go install github.com/googleapis/api-linter/cmd/api-linter@latest
 ```
 Once this is installed, you will need to point the plugin to this downloaded `api-linter.exe` file.
 In _Preferences/Tools/AIP Linter_ set the `api_linter_executable` to the downloaded executable. This should be in the
-_/Users/{{YourUsername}}/go/bin_ directory.
+_/Users/{YourUsername}/go/bin_ directory.
 
 The `Import Paths` are used to find imported `*.proto` files. At this stage, we will simply add the Google protos.<br />
 
@@ -87,7 +85,7 @@ Unselect the option to `Configure automatically` and add the path to the Google 
 to the `Import Paths`.
 
 Your final configuration should look similar to the image below. 
-![](../.vuepress/public/assets/images/aipLinterPreferences.png)
+![](../../.vuepress/public/assets/images/aipLinterPreferences.png)
 
 
 ### Protocol Buffers Plugin
@@ -102,7 +100,7 @@ Select the *Configure Automatically* checkbox and *Apply*.
 While leaving the *JetBrains Protoeditor* directory path, add the path to the Google proto directory, _/Users/{YourUsername}/alis.exchange/google/proto_, to the `Import Paths`.
 
 Your final configuration should look similar to the image below.
-![](../.vuepress/public/assets/images/protocolBufferPreferences.png)
+![](../../.vuepress/public/assets/images/protocolBufferPreferences.png)
 
 ## Whats next?
 

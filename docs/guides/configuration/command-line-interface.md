@@ -1,19 +1,17 @@
 ---
 title: Command Line Interface
-sidebarDepth: 2
-prev: /guides/set-up-your-favourite-IDE
-next: /guides/make-your-first-request
+sidebarDepth: 0
+next: /guides/configuration/set-up-your-favourite-IDE
 ---
 
 # Command Line Interface
 
 The **alis.exchange** command-line interface (CLI) is a powerful tool for managing resources on **alis.exchange**.  You can use this tool to perform many common platform tasks either from the command line or in scripts and other automations. Some example use cases for the CLI:
 
-- List organisations and/or products;
-- Clone a product to your local environment;
 - Create a new product / organisation;
-- Deploy new versions of your product; and
-- Manage the build and deploy steps of your services.
+- Deploy new versions of your product;
+- Manage the build and deploy steps of your services; and
+- Auto-generate infrastructure and implementation code.
 
 ## Install Prerequisites
 

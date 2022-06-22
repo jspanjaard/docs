@@ -1,6 +1,7 @@
 ---
 title: Quick Start
-next: /guides/set-up-your-favourite-IDE
+next: /make-your-first-request
+sidebarDepth: 0
 ---
 # Quick Start
 
@@ -78,7 +79,9 @@ Now that we know what resource is available, `Book`, and what we are able to do 
 
 Experience the simplicity in accessing these methods in any of the supported languages in using one of our preconfigured cloud IDEs:
 
-::: details Go
+:::: tabs
+
+::: tab Go
 #### Make a request using Go
 
 <a href="https://gitpod.io#snapshot/c1eafefa-0414-439e-a618-4089e1d50143" target="_blank">Preconfigured Go cloud IDE</a>
@@ -110,7 +113,7 @@ We suggest creating your own function and incorporating a request to the `BooksC
 * Use the response of `ListBooks` to make multiple `GetBook` requests.
 :::
 
-::: details R
+::: tab R
 #### Make a request using R
 
 <a href="https://gitpod.io#snapshot/c858a081-f9e0-4791-9330-606a568df6fd" target="_blank">Preconfigured R cloud IDE</a>
@@ -140,9 +143,12 @@ We suggest creating your own function and incorporating a request to the `BooksC
 * Loop through all the books and print out the author.
 * Get a book and wrangle the response to be printed out in a sentence structure.
 * Use the response of `ListBooks` to make multiple `GetBook` requests.
+
 :::
 
-If you are interested in recreating this example in your own development environment, we suggest that you check out the [Make your first request guide](/guides/make-your-first-request.md).
+::::
+
+If you are interested in recreating this example in your own development environment, we suggest that you check out the [Make your first request guide](/guides/consume/make-your-first-request.md).
 ## Next Steps
 
 **Ready to join alis.exchange?** <a href="https://alis.exchange/signup" target="_blank">Get in touch</a>.
