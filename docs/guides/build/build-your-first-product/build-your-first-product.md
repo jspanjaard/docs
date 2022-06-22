@@ -1,31 +1,29 @@
-# Build your first product 👷‍
+---
+title: Build your first product
+sidebarDepth: 0
+next: ../../consume/quick-start
+---
+
+# Build your first product
 
 > 👉 In this section, you will build your first product on **alis.exchange** to get a feel for how everything you have installed and read comes together. 
 
-A few final things before we get started:
-1. 👀 This section assumes you have successfully [configured your device](/DeviceConfiguration.md). If you had any
-    troubles, check out our community Q&A for help.
-2. This example is still a work in progress and still requires quite a bit of content. If anything obvious is missing
-or incorrect, please either post in our Discussions, or submit a pull request with the fixes.
-3. The purpose of this is to get you building. The story and everything around it is fictitious
-    and very obviously flawed in business logic. We put a story around it for it to flow, please don't try and reason
-	out the story.
-4. This example attempts to structure content in a way that provides:
-    - 🎥 **Context** - the story we are following and what we aim to achieve.
-    - 🏃‍♂ **Execution** - the actual things that you will need to do. Each will be given an id `Ex #` that you can
-           use to ask questions about on the Discussion forum and will be used for the in-depth explanation in the
-        following onboarding section.
-    - 🤓 **Breakdown** - a high-level explanation of what you did and what happened in the background.
-5. The technical breakdown section will provide a detailed breakdown of everything that you did in this example so
-don't worry if you are not fully comprehending what is happening when you execute the steps - all will come together.
+A few final things before we get started. This section assumes you have successfully [installed the CLI](../../configuration/command-line-interface.md) and [set up your IDE](../../configuration/set-up-your-favourite-IDE.md).
+
+The purpose of this is to get you building. The story and everything around it is fictitious and very obviously flawed in business logic. We put a story around it for it to flow, please don't try and reason out the story.
+
+This example attempts to structure content in a way that provides:<br>
+    🎥 **Context** - the story we are following and what we aim to achieve.<br>
+    🏃‍♂ **Execution** - the actual things that you will need to do.<br>
+    🤓 **Breakdown** - a high-level explanation of what you did and what happened in the background.
 
 Let's go!
 
-## Help Foo grow 10x
+## Help Play grow 10x
 
 ### 🎥 Story time
 
-A group of friends decided to start a company called `Foo` after a discovery in their parents' cupboard led to a set of
+A group of friends decided to start a company called `Play` after a discovery in their parents' cupboard led to a set of
 business ideas. Two of the founders were unpacking a cupboard when they came across an external hard drive that contained
 a large number of eBooks their parents purchased in the mid 2000s. Mike, who always seems to come up with an idea of
 making money, suggested that they could start some online store with these books and acquire additional books as time
@@ -33,38 +31,37 @@ goes on.
 
 Having some experience in software, James suggested that they build out a set of products, each trying to provide a
 well-defined value offering and solving specific problems. Having previously built on **alis.exchange**, it was an
-obvious decision to register their new-found company, Foo, on the exchange. They decided to start by creating a book
-repository product,`BR`, which defines a `book` resource and keeps track of all the books that they have available. This is the product considered in the [make a request to a product guide](/docs/guides/make-your-first-request.md).
+obvious decision to register their new-found company, Play, on the exchange. They decided to start by creating a book
+repository product,`ME`, which defines a `book` resource and keeps track of all the books that they have available. This is the product considered in the [make a request to a product guide](/docs/guides/make-your-first-request.md).
 
-At this point in time, they already have an organisation on **alis.exchange** with their core product `br`. They have given
+At this point in time, they already have an organisation on **alis.exchange** with their core product `ME`. They have given
 their employees freedom to experiment with products, simply ignore these in the repos.
 
 ### 🏃‍♂ Ex 1: Orientate yourself
 
 Since the organisation and product already exists, you will need to `get` these on your device.
 
-1. From your terminal, run `alis org get foo`.
+1. From your terminal, run `alis org get play`.
 
-    > 🤓 This adds the `foo` directory into the `alis.exchange` folder in your `HOME` directory. You can open this to
+    > 🤓 This adds the `play` directory into the `alis.exchange` folder in your `HOME` directory. You can open this to
     > see the various directories that become available. Check out the explanation of how the [alis.exchange folder hierarchy is set up](/docs/references/local-folder-structure.md) to understand what the purpose of each directory is.
    
 2. Open the `/proto` directory in your IDE.
-3. Navigate to `proto/foo/br/resources/books/v1/` to see the definition of the `book` resource and all the methods
-	available for the API.
+3. Navigate to `proto/play/br/resources/books/v1/` to see the definition of the `book` resource and all the methods available for the API.
 
 ### 🎥 The design requirements
 
-The founders at `Foo` have decided to create a new Administrative product, `ad`, that coordinates the loans of books by various users.
+The founders at `Play` have decided to create a new Administrative product, `ad`, that coordinates the loans of books by various users.
 
 The product has already been created on **alis.exchange** and simply requires you to build it out. If you are interested in the process around how a product is created, open the section below.
 
 :::details 🤓 ad product creation on alis.exchange
 
-The process of creating a product is facilitated through the **alis.exchange** CLI. The following sections breaks down the actions that was followed by `foo` to create a product and a brief overview of what happened in the background.
+The process of creating a product is facilitated through the **alis.exchange** CLI. The following sections breaks down the actions that was followed by `play` to create a product and a brief overview of what happened in the background.
 
 #### Actions executed
 
-1. In the terminal, the command `alis product create foo.ad` was run. You can run `alis product create -h` 
+1. In the terminal, the command `alis product create play.ad` was run. You can run `alis product create -h` to get information on the command
 2. The prompts were followed that required the user to specify:
     - Display name for the product
     - Owner of the product
@@ -78,12 +75,11 @@ Simple right? In the background, a lot of heavy lifting was done. The following 
 
 While the CLI was displaying a spinner:
 
-- A Google Cloud project that hosts the product was created within the foo organisation.
+- A Google Cloud project that hosts the product was created within the play organisation.
 - An empty Google Cloud Source Repository was created for the `ad` product.
 - Various permissions was added for the specified owner of the product in order to control access for clients and developers.
-- Various Terraform template files was added within `$HOME/alis.exchange/foo/proto/foo/ad` that are used to manage the cloud infrastructure of your product. These Terraform files collectively specifies all the cloud infrastructure that needs to be configured for your product to work, such as enabling various APIs (Cloud Run, Firestore, etc.) and creating permission groups.
+- Various Terraform template files was added within `$HOME/alis.exchange/play/proto/play/ad` that are used to manage the cloud infrastructure of your product. These Terraform files collectively specifies all the cloud infrastructure that needs to be configured for your product to work, such as enabling various APIs (Cloud Run, Firestore, etc.) and creating permission groups.
 :::
-
 
  In order to coordinate the loans of books by various users, they firstly require a `receipt` resource.
 
@@ -104,6 +100,14 @@ In the case of our `receipt` neuron, the neuron will be providing an API to perf
 <!-- Find out more by reading the article.... -->
 :::
 
+### 🏃‍♂ Overview of the process
+
+The common process followed when building out new aspects of a product is depicted below
+<!-- Add a diagram  -->
+
+
+
+
 ### 🏃‍♂ Create resource neuron
 
 #### 🏃‍♂ Ex 2: Create resource neuron using terminal
@@ -112,13 +116,13 @@ Creating a neuron requires the specification of a resource ID, which follows the
     - `resources-{resourceName}-{majorVersion} for resources
     - `services-{serviceName}-{majorVersion} for services
 
-In our example, we would usually have specified the `receipts` resource as `resources-receipts-v1`. However, since we are reusing this product as a playground for multiple users, we ask that you add a unique ending to the resource, such as adding your initials. Eg. `resources-receiptsrs-v1`.
+In our example, we would usually have specified the `receipts` resource as `resources-receipts-v1`. However, since we are reusing this product as a playground for multiple users, we ask that you add a unique ending to the resource, such as adding your initials. Eg. `resources-receipts-v1`.
 
-1. From your terminal, run the command `alis neuron create foo.ad.{{yourResourceID}}`, specifying your unique resource ID.
+1. From your terminal, run the command `alis neuron create play.ad.{{yourResourceID}}`, specifying your unique resource ID.
 
 > 🤓 In the background, the CLI created neuron directories with various template files. These will make more sense as we start using them but to know at this stage:<br>
-> - Inside the `$HOME/alis.exchange/foo/proto/foo/ad/resources/{resourceName}/v1` directory, a `service.proto` and various Terraform (`*.tf`) files were added;
-> - Inside the `$HOME/alis.exchange/foo/products/ad/resources/{resourceName}/v1` directory, various Go (`*.go`) template files were added that will be used for implementing the code as well as a Dockerfile that is used to containerize your source code.
+> - Inside the `$HOME/alis.exchange/play/proto/play/ad/resources/{resourceName}/v1` directory, a `service.proto` and various Terraform (`*.tf`) files were added;
+> - Inside the `$HOME/alis.exchange/play/products/ad/resources/{resourceName}/v1` directory, various Go (`*.go`) template files were added that will be used for implementing the code as well as a Dockerfile that is used to containerize your source code.
 
 #### 🏃‍♂ Ex 3: Define the resource and methods
 
@@ -126,7 +130,7 @@ In our example, we would usually have specified the `receipts` resource as `reso
 > 🤓 A high-level understanding of the proto file structure and the comments on the various aspects of the file content
 > should be sufficient to orientate you around the following steps.
 
-‼️ The full proto used in this example can be [found in the repo](/docs//guides//build-your-first-product/src/receipts/receipts.proto). Be careful when copying over content that you **DO NOT** change the `package` name (yours should be `package foo.ad.resources.{yourResourceName}.v1;`) or the `option go_package` specification (yours should be `option go_package = "go.protobuf.foo.alis.exchange/foo/ad/resources/{yourResourceName}/v1";`)
+‼️ The full proto used in this example can be [found in the repo](/docs//guides//build-your-first-product/src/receipts/receipts.proto). Be careful when copying over content that you **DO NOT** change the `package` name (yours should be `package play.ad.resources.{yourResourceName}.v1;`) or the `option go_package` specification (yours should be `option go_package = "go.protobuf.play.alis.exchange/play/ad/resources/{yourResourceName}/v1";`)
 
 The following steps will run through some important aspects of the proto.
 
@@ -144,7 +148,7 @@ The following steps will run through some important aspects of the proto.
 
     > 🚩 If your IDE cannot find the imports, ensure that you:
     > - Have run `alis org get google`; and
-    > - [Configured your plugins correctly](/DeviceConfiguration.md).
+    > - [Configured your plugins correctly](../../configuration/set-up-your-favourite-IDE.md).
 
 2. In `receipts.proto`, define the `Receipt` resource:
     ```protobuf
@@ -156,7 +160,7 @@ The following steps will run through some important aspects of the proto.
         string name = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
 
         //The email of the client.
-        //Example: bar@foo.com
+        //Example: bar@play.com
         string client = 2 [(google.api.field_behavior) = REQUIRED];
 
         //The full names of the books taken out by the client.
@@ -248,10 +252,10 @@ When building your own neurons, you may bulk up your neurons with additional fun
 
  In your terminal, run the following command, specifying your neuron name:
  ```bash
- $ alis neuron genprotobuf foo.ad.resources-{uniqueNeuronName}-v1
+ $ alis neuron genprotobuf play.ad.resources-{uniqueNeuronName}-v1
  ```
 
- This commands generates `.pb.go` files locally in the `$HOME/alis.exchange/foo/protobuf/go/*` directory, following the path of the Neuron. The contents of these files are not necessary to understand, other than knowing that they contain the definitions for the Go language.
+ This commands generates `.pb.go` files locally in the `$HOME/alis.exchange/play/protobuf/go/*` directory, following the path of the Neuron. The contents of these files are not necessary to understand, other than knowing that they contain the definitions for the Go language.
 
  > 🤓 Once we have finished implementing our API we will push these files to make them available for others to use.
 
@@ -263,7 +267,7 @@ When you ran `alis neuron create ...` command, various template files were also 
 
 In your `go.mod`, uncomment the line similar to the one below:
 ```
-replace go.protobuf.foo.alis.exchange => ../../../../../../foo/protobuf/go
+replace go.protobuf.play.alis.exchange => ../../../../../../play/protobuf/go
 ```
 2. Ensure that your terminal is open in the `v1` directory containing the `go.mod` file and run the command `go mod tidy` to sync the dependencies.
 
@@ -273,7 +277,7 @@ replace go.protobuf.foo.alis.exchange => ../../../../../../foo/protobuf/go
 
 1. **Establishing client connection during `init()`** 
 
-The init section contains various boilerplate code, of which we can remove that which is not necessary, and add further connections. We want to create a connection with Firestore, which will store the details of our `receipts`, as well as to the `foo.br` product in order to get various book defintions.
+The init section contains various boilerplate code, of which we can remove that which is not necessary, and add further connections. We want to create a connection with Firestore, which will store the details of our `receipts`, as well as to the `play.br` product in order to get various book defintions.
 
 Ensure that the section above your `main.go` looks exactly like code below:
 
@@ -289,8 +293,8 @@ import (
 	"cloud.google.com/go/firestore"
 	"google.golang.org/grpc"
 
-	pbBooks "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1"
-	pb "go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1"
+	pbBooks "go.protobuf.play.alis.exchange/play/br/resources/books/v1"
+	pb "go.protobuf.play.alis.exchange/play/ad/resources/receipts/v1"
 )
 
 // client is a global client, initialized once per cloud run instance.
@@ -321,8 +325,8 @@ ffunc init() {
 		log.Fatalf("firestore.NewClient: %v", err)
 	}
 
-	// Retrieve BR cloud run hash from the environment.
-	brHash := os.Getenv("ALIS_OS_BR_CLOUDRUNHASH")
+	// Retrieve ME cloud run hash from the environment.
+	brHash := os.Getenv("ALIS_OS_ME_CLOUDRUNHASH")
 	if brHash == "" {
 		log.Fatal("ALIS_OS_PROJECT env not set.")
 	}
@@ -375,19 +379,19 @@ ALIS_OS_ENV=development
 # is a product deployment and therefore requires a product deployment
 # to exist before it can be declared.
 #
-# This can be found be running `alis product tree foo.ad` and selecting
+# This can be found be running `alis product tree play.ad` and selecting
 # a deployment ID. We typically use a dev environment for local development
 # and testing.
-ALIS_OS_PROJECT=foo-ad-dev-....
+ALIS_OS_PROJECT=play-ad-dev-....
 
 # The Cloud Run hash of the br product deployment
 # that we have access to.
 #
 # For your own products, you can find this hash by opening
 # a Cloud Run instance and checking the URL.
-ALIS_OS_BR_CLOUDRUNHASH=z5x5ywf7za
+ALIS_OS_ME_CLOUDRUNHASH=z5x5ywf7za
 ```
-<!-- TODO: NB make sure we can't generate service account keys in the Foo org using the CLI -->
+<!-- TODO: NB make sure we can't generate service account keys in the Play org using the CLI -->
 
 3. **Implement the gRPC server** 
 
@@ -440,7 +444,7 @@ import (
 	"log"
 	"testing"
 
-	pb "go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1"
+	pb "go.protobuf.play.alis.exchange/play/ad/resources/receipts/v1"
 	"google.golang.org/genproto/googleapis/type/date"
 )
 
@@ -461,7 +465,7 @@ func TestReceiptService_CreateReceipt(t *testing.T) {
 
 	// Construct a request message
 	req := pb.CreateReceiptRequest{Receipt: &pb.Receipt{
-		Client: "test@foo.bar",
+		Client: "test@play.bar",
 		Books:  []string{"books/{book1}", "books/{book2}"},
 		RequiredReturnDate: &date.Date{
 			Year:  2023,
@@ -517,8 +521,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	pbBooks "go.protobuf.foo.alis.exchange/foo/br/resources/books/v1"
-	pb "go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1"
+	pbBooks "go.protobuf.play.alis.exchange/play/br/resources/books/v1"
+	pb "go.protobuf.play.alis.exchange/play/ad/resources/receipts/v1"
 	"google.golang.org/genproto/googleapis/type/date"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -621,7 +625,7 @@ As we have noted, running `alis neuron genproto` WITHOUT the `-p` generates the 
 The locally compiled files need to be removed such as to not cause version control conflicts. In your terminal, navigate to the neuron's protobuf files by running
 
 ```bash
-cd ~/alis.exchange/foo/protobuf/go/foo/ad/resources/receipts/v1/
+cd ~/alis.exchange/play/protobuf/go/play/ad/resources/receipts/v1/
 ```
 
 Check that you are in the correct directory by running `ls`. The response should contain two files with `.pb.go` ending.
@@ -633,7 +637,7 @@ Remove these files by runing `rm *`. Select yes if prompted whether to delete al
 To compile the the proto and push it to the repo managed by **alis.exchange** run the following command from your terminal, inserting your resource name:
 
 ```bash
-alis neuron genproto foo.ad.resources-{yourResource}-v1 -p
+alis neuron genproto play.ad.resources-{yourResource}-v1 -p
 ```
 
 - **Update Go mod to point to global definitions**
@@ -641,7 +645,7 @@ alis neuron genproto foo.ad.resources-{yourResource}-v1 -p
 In your `go.mod` file, remove all the content such that the file looks similar to the example below
 
 ```go 
-module foo.lb.resources.receipts.v1
+module play.lb.resources.receipts.v1
 
 go 1.17
 
@@ -649,7 +653,7 @@ require (
 )
 
 ```
-If successful, your `go.mod` should contain a `go.protobuf.foo.alis.exchange` entry under `require`. 
+If successful, your `go.mod` should contain a `go.protobuf.play.alis.exchange` entry under `require`. 
 
 :::details Troubleshooting errors
 
@@ -659,7 +663,7 @@ Two common errors that users get at this stage are:
 
 Typically follows the error message:
 
-``` ... module go.protobuf.foo.alis.exchange@latest found (...), but does not contain package go.protobuf.foo.alis.exchange/foo/ad/resources/receipts/v1
+``` ... module go.protobuf.play.alis.exchange@latest found (...), but does not contain package go.protobuf.play.alis.exchange/play/ad/resources/receipts/v1
 ```
 
 This means that your previous step of pushing the definitions to the repo was not successful. Perform the action in 2. again and retry running `go mod tidy`
@@ -668,7 +672,7 @@ This means that your previous step of pushing the definitions to the repo was no
 
 Run the following command from the terminal and attempt `go mod tidy` again.
 
-go env -w GOPRIVATE=go.protobuf.foo.alis.exchange
+go env -w GOPRIVATE=go.protobuf.play.alis.exchange
 :::
 
 We are now ready to build and deploy
@@ -682,7 +686,7 @@ In the neuron's directory within the `proto` repo, we need to add variables to t
 
 ```hcl
 # Custom neuron specific ENVS:
-variable "ALIS_OS_BR_CLOUDRUNHASH" {}
+variable "ALIS_OS_ME_CLOUDRUNHASH" {}
 ```
 
 - *Add the variable to the container*
@@ -706,8 +710,8 @@ resource "google_cloud_run_service" "default" {
 			value = var.ALIS_OS_PROJECT
 		}
 		env {
-			name = "ALIS_OS_BR_CLOUDRUNHASH"
-			value = var.ALIS_OS_BR_CLOUDRUNHASH
+			name = "ALIS_OS_ME_CLOUDRUNHASH"
+			value = var.ALIS_OS_ME_CLOUDRUNHASH
 		}
 		resources {
 			limits = {
@@ -729,14 +733,14 @@ resource "google_cloud_run_service" "default" {
 In your terminal, run the following command, specifying your neuron name:
 
 ```bash
-alis neuron build foo.ad.resources-{yourResource}-v1
+alis neuron build play.ad.resources-{yourResource}-v1
 ```
 
 > 🤓 In the background, **alis.exchange** performs various actions:<br>
 > - A tag is added to the latest commit in the `proto` repo. This is used to know what the state of the proto and infrastructure was when the `build` took place.<br>
 > - The CLI looks for one or more *Dockerfile* in the `products/ad/resources/.../v1` directory.<br>
-> - If these files are present, these are executed within the *product project* (foo-lb-product-msc6ohw) [Cloud Build](https://console.cloud.google.com/cloud-build/builds?project=foo-ad-product-msc6ohw), which build the container images and places these on 
-[Artifact Registry](https://cloud.google.com/artifact-registry) within the *product project* (foo-lb-product-msc6ohw).<br>
+> - If these files are present, these are executed within the *product project* (play-lb-product-msc6ohw) [Cloud Build](https://console.cloud.google.com/cloud-build/builds?project=play-ad-product-msc6ohw), which build the container images and places these on 
+[Artifact Registry](https://cloud.google.com/artifact-registry) within the *product project* (play-lb-product-msc6ohw).<br>
 > - Updates the resources in the **alis.exchange** operating system such as to reflect the changes. 
 
 At this stage, the image has been created but it is not yet available for usage by anyone. To make it accessible, it needs to be deployed to a `product deployment`.
@@ -746,15 +750,15 @@ At this stage, the image has been created but it is not yet available for usage 
 From the terminal, run the following command, specifying your neuron name:
 
 ```bash
-alis neuron deploy foo.ad.resource-{yourResource}-v1 -e
+alis neuron deploy play.ad.resource-{yourResource}-v1 -e
 ```
 
 The `-e` is added to specify environmental variables for the production environment. 
 
 - Follow the prompts and deploy the neuron to the existing product deployment.
-- When asked to add an environmental variable, add `ALIS_OS_BR_CLOUDRUNHASH` with the value of `z5x5ywf7za`. The other environmental variables are added automatically by **alis.exchange**.
+- When asked to add an environmental variable, add `ALIS_OS_ME_CLOUDRUNHASH` with the value of `z5x5ywf7za`. The other environmental variables are added automatically by **alis.exchange**.
 
-> 🤓 In the background, **alis.exchange** retrieves the neuron's Terraform specification from the commit history at the point in time when the `build` was run and applies the specification from the *product project* (foo-lb-product-msc6ohw), which has the relevant permissions to manage deployments. This can also be viewed in the [Cloud Build logs](https://console.cloud.google.com/cloud-build/builds?project=foo-ad-product-msc6ohw).<br>
+> 🤓 In the background, **alis.exchange** retrieves the neuron's Terraform specification from the commit history at the point in time when the `build` was run and applies the specification from the *product project* (play-lb-product-msc6ohw), which has the relevant permissions to manage deployments. This can also be viewed in the [Cloud Build logs](https://console.cloud.google.com/cloud-build/builds?project=play-ad-product-msc6ohw).<br>
 > Scan throught the `*.tf` files to see what all is performed. It is valuable to know that in the `cloudrun.tf` a new Cloud Run service is created and the container built in the previous step is managed by the Cloud Run.
 
 Once the deployment has taken place, your neuron is in production 🚀
