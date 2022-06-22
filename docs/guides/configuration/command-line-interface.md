@@ -1,6 +1,6 @@
 ---
 title: Command Line Interface
-sidebarDepth: 2
+sidebarDepth: 0
 next: /guides/configuration/set-up-your-favourite-IDE
 ---
 

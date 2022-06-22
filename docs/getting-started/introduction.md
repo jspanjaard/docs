@@ -17,13 +17,13 @@ Our aim is to empower anyone to create value for their organisation by democrati
 
 ## Want to see more?
 
-#### Consume digital services
+**Consume digital services**<br>
 We aim to ensure that how software across **alis.exchange** operates, communicates and integrates is simple and consistent. [Find out more and experience it yourself](../guides/consume/quick-start.md).
 
-#### Build digital services
+**Build digital services**<br>
 **alis.exchange** gives you and your organisation software development superpowers. [Experience what we make possible](../guides/build/overview.md).
 
-#### Configure your device
+**Configure your device**<br>
 Already joined **alis.exchange**? Follow the guides to setup your local environment, starting off with our [command line interface](../guides/configuration/command-line-interface.md).
 
 #### Get in touch
