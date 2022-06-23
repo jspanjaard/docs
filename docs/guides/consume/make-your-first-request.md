@@ -5,11 +5,11 @@ sidebarDepth: 0
 
 # Make a request to a product in your local environment
 
-> 🚩 This section is supplementary to the [quickstart](/getting-started/quick-start.md). We recommend that you first complete the quickstart before attempting this section.
+> 🚩 This section is supplementary to the [quickstart](/docs/guides/consume/quick-start.md). We recommend that you first complete the quickstart before attempting this section.
 
 Given the underlying technologies used, **alis.exchange** provides the ability to generate client libraries for various
 supported coding languages. For users of the product, it allows you to programmatically access products natively in your
-code without having to wrangle obscure, unpredictable data objects (see [quickstart](/getting-started/quick-start.md)).
+code without having to wrangle obscure, unpredictable data objects (see [quickstart](/docs/guides/consume/quick-start.md).
 
 Irrespective of the language, this is done in two steps:
 
@@ -224,7 +224,7 @@ func NewConn(ctx context.Context, host string, insecure bool) (*grpc.ClientConn,
 }
 ```
 
-### Make a request
+### 2. Make a request
 
 The `booksClient` provides you all the methods available, with descriptions of the methods and a specification of what
 the request and responses are. Most IDEs allow you to explore these by hovering over client and method names, similar to

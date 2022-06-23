@@ -1,5 +1,6 @@
 ---
 title: Set up your favourite IDE
+sidebarDepth: 0
 ---
 
 # Set up your favourite IDE

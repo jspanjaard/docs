@@ -7,7 +7,12 @@ sidebarDepth: 0
 
 We aim to ensure that how software across **alis.exchange** operates, communicates and integrates is simple and consistent. Whether you are getting results from a model, updating a database or executing trades, all of these actions should feel familiar. This allows you to seamlessly adopt anything across **alis.exchange** without spending hours in obscure documentation and the toil of attempting to integrate it in your code.
 
-What does that experience feel like? In this section, we want to provide you with a few basic concepts and then allow you to experience **alis.exchange** for yourself.
+What does that experience feel like? In this section, we want to provide you with a few basic concepts and then allow you to experience **alis.exchange** for yourself. Below is a teaser of what you can expect 😉.
+
+![](./img/quick-start-autocomplete1.gif)
+
+![](./img/quick-start-autocomplete2.gif)
+
 
 ## Definition-first approach
 
