@@ -66,7 +66,7 @@ echo 'export PATH=$PATH:~/alis.exchange/cli' >> ~/.zshrc
 
    | MacOS        | Linux  |
       | ------ | -----|
-   |   | [Linux Arm](https://files.cli.alis.services/linux/arm64/latest/alis) |
+   |   | [Linux Arm](https://files.cli.alis.services/linux/arm/latest/alis) |
    | [Darwin Arm64 (M1)](https://files.cli.alis.services/darwin/arm64/latest/alis) | [Linux Arm64](https://files.cli.alis.services/linux/arm64/latest/alis) |
    | [Darwin Amd64](https://files.cli.alis.services/darwin/amd64/latest/alis) | [Linux Amd64](https://files.cli.alis.services/linux/arm64/latest/alis) | 
 
@@ -132,10 +132,4 @@ alis -h
 
 # list available organisations
 alis org list
-
-# Setup your local environment for organisation 'play'
-alis org get play
-
-# list available products
-alis product list play
 ```

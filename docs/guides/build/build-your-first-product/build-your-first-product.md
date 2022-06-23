@@ -1,7 +1,7 @@
 ---
 title: Build your first product
 sidebarDepth: 0
-next: ../../consume/quick-start
+next: /guides/consume/quick-start
 ---
 
 # Build your first product
@@ -81,7 +81,7 @@ While the CLI was displaying a spinner:
 - Various Terraform template files was added within `$HOME/alis.exchange/play/proto/play/ad` that are used to manage the cloud infrastructure of your product. These Terraform files collectively specifies all the cloud infrastructure that needs to be configured for your product to work, such as enabling various APIs (Cloud Run, Firestore, etc.) and creating permission groups.
 :::
 
- In order to coordinate the loans of books by various users, they firstly require a `receipt` resource.
+In order to coordinate the loans of books by various users, they firstly require a `receipt` resource.
 
 The use case is as follows: when a client takes out one or more books, a receipt is created that keeps track of various
 information such as who client is, which books were borrowed, the date the books were borrowed and the required return date.
@@ -724,22 +724,22 @@ resource "google_cloud_run_service" "default" {
 }
 ```
 
-#### 🏃‍♂ Ex 8: Build the neuron
+#### 🏃‍♂ Ex 8: Release the neuron
 
 1. Ensure that all files in both the `proto` and `products/ad` have been added to Git.
 2. Commit and push all files that you have worked on in the neuron.
-3. **Build the neuron**
+3. **Release the neuron**
 
 In your terminal, run the following command, specifying your neuron name:
 
 ```bash
-alis neuron build play.ad.resources-{yourResource}-v1
+alis neuron release play.ad.resources-{yourResource}-v1
 ```
 
 > 🤓 In the background, **alis.exchange** performs various actions:<br>
-> - A tag is added to the latest commit in the `proto` repo. This is used to know what the state of the proto and infrastructure was when the `build` took place.<br>
+> - A tag is added to the latest commit in the `proto` repo. This is used to know what the state of the proto and infrastructure was when the `release` took place.<br>
 > - The CLI looks for one or more *Dockerfile* in the `products/ad/resources/.../v1` directory.<br>
-> - If these files are present, these are executed within the *product project* (play-lb-product-msc6ohw) [Cloud Build](https://console.cloud.google.com/cloud-build/builds?project=play-ad-product-msc6ohw), which build the container images and places these on 
+> - If these files are present, these are executed within the *product project* (play-lb-product-msc6ohw) [Cloud Build](https://console.cloud.google.com/cloud-build/builds?project=play-ad-product-msc6ohw), which builds the container images and places these on 
 [Artifact Registry](https://cloud.google.com/artifact-registry) within the *product project* (play-lb-product-msc6ohw).<br>
 > - Updates the resources in the **alis.exchange** operating system such as to reflect the changes. 
 
@@ -758,7 +758,7 @@ The `-e` is added to specify environmental variables for the production environm
 - Follow the prompts and deploy the neuron to the existing product deployment.
 - When asked to add an environmental variable, add `ALIS_OS_ME_CLOUDRUNHASH` with the value of `z5x5ywf7za`. The other environmental variables are added automatically by **alis.exchange**.
 
-> 🤓 In the background, **alis.exchange** retrieves the neuron's Terraform specification from the commit history at the point in time when the `build` was run and applies the specification from the *product project* (play-lb-product-msc6ohw), which has the relevant permissions to manage deployments. This can also be viewed in the [Cloud Build logs](https://console.cloud.google.com/cloud-build/builds?project=play-ad-product-msc6ohw).<br>
+> 🤓 In the background, **alis.exchange** retrieves the neuron's Terraform specification from the commit history at the point in time when the `release` was run and applies the specification from the *product project* (play-lb-product-msc6ohw), which has the relevant permissions to manage deployments. This can also be viewed in the [Cloud Build logs](https://console.cloud.google.com/cloud-build/builds?project=play-ad-product-msc6ohw).<br>
 > Scan throught the `*.tf` files to see what all is performed. It is valuable to know that in the `cloudrun.tf` a new Cloud Run service is created and the container built in the previous step is managed by the Cloud Run.
 
 Once the deployment has taken place, your neuron is in production 🚀
@@ -766,5 +766,5 @@ Once the deployment has taken place, your neuron is in production 🚀
 <!-- TODO: Add a way for users to hit the product -->
 <!-- ### 🙋🏾‍♀️ FAQ
 
-- How do I know when to run `build` and `deploy` for a `product` or `neuron`?
+- How do I know when to run `release` and `deploy` for a `product` or `neuron`?
  -->

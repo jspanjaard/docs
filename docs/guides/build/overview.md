@@ -1,7 +1,7 @@
 ---
 title: Overview
 sidebarDepth: 2
-next: ../consume/quick-start
+next: /guides/consume/quick-start
 ---
 
 # Overview
