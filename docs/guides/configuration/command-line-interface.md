@@ -107,9 +107,9 @@ setx /M PATH %PATH%;%HOMEPATH%\alis.exchange\cli
 
    | Windows                                                                        | 
    | ------- |
-   | [Windows Arm](https://files.cli.alis.services/windows/arm/latest/alis.exe)     |
-   | [Windows Arm64](https://files.cli.alis.services/windows/arm64/latest/alis.exe) |
-   | [Windows Amd64](https://files.cli.alis.services/windows/amd64/latest/alis.exe) |
+   | [Windows Arm](https://files.cli.alis.services/windows/arm/4.0.96/alis.exe)     |
+   | [Windows Arm64](https://files.cli.alis.services/windows/arm64/4.0.96/alis.exe) |
+   | [Windows Amd64](https://files.cli.alis.services/windows/amd64/4.0.96/alis.exe) |
    
 4. Place the file in your _alis.exchange/cli_ folder. Ensure the file name and extension is `alis.exe`.
 
